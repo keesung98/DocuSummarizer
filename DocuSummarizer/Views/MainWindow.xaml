@@ -1,0 +1,84 @@
+﻿<Window x:Class="DocuSummarizer.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="DocuSummarizer" Height="800" Width="1200"
+        mc:Ignorable="d"
+        AllowDrop="True"
+        Drop="ImageDrop"
+        Background="#f5f5f5">
+
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="7*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- 좌측: 이미지 및 설정 -->
+        <StackPanel Grid.Column="0" Margin="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+            <TextBlock Text="📂 이미지 선택" FontWeight="Bold" FontSize="16" Margin="0 0 0 5"/>
+
+            <!-- 이미지 선택 -->
+            <Border BorderBrush="Gray" BorderThickness="1" Background="WhiteSmoke"
+                    Height="200" AllowDrop="True" Drop="ImageDrop">
+                <TextBlock Text="이미지를 여기로 드래그하거나 '열기' 버튼 클릭"
+                           VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Foreground="Gray" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Border>
+            <Button Content="📁 이미지 열기" Margin="0 10 0 0" Height="35" Click="OpenImage_Click"/>
+
+            <!-- 전처리 옵션 -->
+            <GroupBox Header="🧹 전처리 옵션" Margin="0 20 0 0">
+                <StackPanel Margin="10">
+                    <CheckBox Content="흑백 변환 (Grayscale)" />
+                    <CheckBox Content="노이즈 제거 (Blur)" />
+                    <CheckBox Content="기울기 보정 (Deskew)" />
+                </StackPanel>
+            </GroupBox>
+
+            <!-- 작업 버튼 -->
+            <StackPanel Orientation="Vertical" Margin="0 20 0 0">
+                <Button Content="🔍 OCR 실행" Height="40" Margin="0 5 0 0" Click="RunOCR_Click"/>
+                <Button Content="🧠 요약 실행" Height="40" Margin="0 5 0 0" Click="RunSummary_Click"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- 우측: 미리보기 & 결과 -->
+        <Grid Grid.Column="1" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+
+            <!-- 이미지 미리보기 -->
+            <GroupBox Header="🖼️ 이미지 미리보기" Margin="0 0 0 10">
+                <ScrollViewer>
+                    <Image Name="PreviewImage" Stretch="Uniform" />
+                </ScrollViewer>
+            </GroupBox>
+
+            <!-- OCR & 요약 결과 -->
+            <TabControl Grid.Row="1" Margin="0">
+                <TabItem Header="원문">
+                    <ScrollViewer>
+                        <TextBox Name="OriginalTextBox" IsReadOnly="True" 
+                                 TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="요약">
+                    <ScrollViewer>
+                        <TextBox Name="SummaryTextBox" IsReadOnly="True" 
+                                 TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
+                    </ScrollViewer>
+                </TabItem>
+            </TabControl>
+
+            <!-- 하단 버튼 -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 10 0 0">
+                <Button Content="📋 복사" Width="100" Margin="5" Click="CopySummary_Click"/>
+                <Button Content="💾 저장" Width="100" Margin="5" Click="SaveSummary_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
