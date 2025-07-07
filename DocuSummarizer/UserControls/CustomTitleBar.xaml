@@ -1,0 +1,42 @@
+﻿<UserControl
+    x:Class="DocuSummarizer.UserControls.CustomTitleBar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:DocuSummarizer.UserControls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Height="25"
+    Background="{DynamicResource TitleBarBrush}"
+    mc:Ignorable="d">
+    <Grid>
+        <TextBlock
+            x:Name="TitleName"
+            Margin="10,0,0,0"
+            VerticalAlignment="Center"
+            Foreground="White" />
+
+        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button
+                x:Name="MinimizeButton"
+                Width="30"
+                Height="25"
+                Background="Transparent"
+                Content="─"
+                Foreground="White" />
+            <Button
+                x:Name="MaximizeRestoreButton"
+                Width="30"
+                Height="25"
+                Background="Transparent"
+                Content="☐"
+                Foreground="White" />
+            <Button
+                x:Name="CloseButton"
+                Width="30"
+                Height="25"
+                Background="Transparent"
+                Content="✕"
+                Foreground="White" />
+        </StackPanel>
+    </Grid>
+</UserControl>

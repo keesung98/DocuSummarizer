@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--  Primary Colors  -->
+    <Color x:Key="TitleBarColor">#0f1b4f</Color>
+    <Color x:Key="BackgroundColor">#051147</Color>
+
+    <!--  Brush 변환  -->
+    <SolidColorBrush x:Key="TitleBarBrush" Color="{StaticResource TitleBarColor}" />
+    <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}" />
+</ResourceDictionary>
