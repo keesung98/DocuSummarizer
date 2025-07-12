@@ -3,7 +3,147 @@
     <Color x:Key="TitleBarColor">#5668ba</Color>
     <Color x:Key="BackgroundColor">#FFFFFFFF</Color>
 
+    <!--  PDF Drag Drop Colors  -->
+    <Color x:Key="DragDropBorderColor">#E0E0E0</Color>
+    <Color x:Key="DragDropBackgroundColor">#FAFAFA</Color>
+    <Color x:Key="DragDropBorderHoverColor">#4A90E2</Color>
+    <Color x:Key="DragDropBackgroundHoverColor">#F0F8FF</Color>
+    <Color x:Key="PrimaryAccentColor">#4A90E2</Color>
+    <Color x:Key="PrimaryTextColor">#2C3E50</Color>
+    <Color x:Key="SecondaryTextColor">#7F8C8D</Color>
+    <Color x:Key="ButtonBackgroundColor">#4A90E2</Color>
+    <Color x:Key="ButtonHoverColor">#357ABD</Color>
+    <Color x:Key="ButtonPressedColor">#2E6DA4</Color>
+    <Color x:Key="SuccessBackgroundColor">#E8F5E8</Color>
+    <Color x:Key="SuccessBorderColor">#4CAF50</Color>
+    <Color x:Key="SuccessTextColor">#2E7D32</Color>
+    <Color x:Key="DragOverlayColor">#80E3F2FD</Color>
+
     <!--  Brush 변환  -->
     <SolidColorBrush x:Key="TitleBarBrush" Color="{StaticResource TitleBarColor}" />
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}" />
+
+    <!--  PDF Drag Drop Brushes  -->
+    <SolidColorBrush x:Key="DragDropBorderBrush" Color="{StaticResource DragDropBorderColor}" />
+    <SolidColorBrush x:Key="DragDropBackgroundBrush" Color="{StaticResource DragDropBackgroundColor}" />
+    <SolidColorBrush x:Key="DragDropBorderHoverBrush" Color="{StaticResource DragDropBorderHoverColor}" />
+    <SolidColorBrush x:Key="DragDropBackgroundHoverBrush" Color="{StaticResource DragDropBackgroundHoverColor}" />
+    <SolidColorBrush x:Key="PrimaryAccentBrush" Color="{StaticResource PrimaryAccentColor}" />
+    <SolidColorBrush x:Key="PrimaryTextBrush" Color="{StaticResource PrimaryTextColor}" />
+    <SolidColorBrush x:Key="SecondaryTextBrush" Color="{StaticResource SecondaryTextColor}" />
+    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="{StaticResource ButtonBackgroundColor}" />
+    <SolidColorBrush x:Key="ButtonHoverBrush" Color="{StaticResource ButtonHoverColor}" />
+    <SolidColorBrush x:Key="ButtonPressedBrush" Color="{StaticResource ButtonPressedColor}" />
+    <SolidColorBrush x:Key="SuccessBackgroundBrush" Color="{StaticResource SuccessBackgroundColor}" />
+    <SolidColorBrush x:Key="SuccessBorderBrush" Color="{StaticResource SuccessBorderColor}" />
+    <SolidColorBrush x:Key="SuccessTextBrush" Color="{StaticResource SuccessTextColor}" />
+    <SolidColorBrush x:Key="DragOverlayBrush" Color="{StaticResource DragOverlayColor}" />
+
+    <!--  PDF Drag Drop Styles  -->
+    <Style x:Key="DragDropBorderStyle" TargetType="Border">
+        <Setter Property="BorderBrush" Value="{StaticResource DragDropBorderBrush}" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="Background" Value="{StaticResource DragDropBackgroundBrush}" />
+        <Style.Triggers>
+            <Trigger Property="Tag" Value="DragOver">
+                <Setter Property="BorderBrush" Value="{StaticResource DragDropBorderHoverBrush}" />
+                <Setter Property="Background" Value="{StaticResource DragDropBackgroundHoverBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="IconStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
+        <Setter Property="FontSize" Value="48" />
+        <Setter Property="Foreground" Value="{StaticResource PrimaryAccentBrush}" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,0,0,16" />
+    </Style>
+
+    <Style x:Key="TitleStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,0,0,8" />
+    </Style>
+
+    <Style x:Key="DescriptionStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Margin" Value="0,0,0,20" />
+    </Style>
+
+    <Style x:Key="BrowseButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource ButtonBackgroundBrush}" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="Padding" Value="24,10" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border
+                        Padding="{TemplateBinding Padding}"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="6">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource ButtonHoverBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{StaticResource ButtonPressedBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="FileInfoStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,16,0,0" />
+    </Style>
+
+    <Style x:Key="SuccessPanelStyle" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource SuccessBackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource SuccessBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="Padding" Value="16,12" />
+    </Style>
+
+    <Style x:Key="SuccessFileNameStyle" TargetType="TextBlock">
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Foreground" Value="{StaticResource SuccessTextBrush}" />
+    </Style>
+
+    <Style x:Key="SuccessFileSizeStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Foreground" Value="#66BB6A" />
+    </Style>
+
+    <Style x:Key="DragOverlayStyle" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource DragOverlayBrush}" />
+        <Setter Property="CornerRadius" Value="12" />
+    </Style>
+
+    <Style x:Key="DragOverlayIconStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
+        <Setter Property="FontSize" Value="64" />
+        <Setter Property="Foreground" Value="#1976D2" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Opacity" Value="0.8" />
+    </Style>
 </ResourceDictionary>

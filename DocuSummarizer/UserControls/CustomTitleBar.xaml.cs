@@ -20,11 +20,18 @@ namespace DocuSummarizer.UserControls
     /// </summary>
     public partial class CustomTitleBar : UserControl
     {
+        // 이전 윈도우 상태 저장용 변수들
+        private double _restoreLeft;
+        private double _restoreTop;
+        private double _restoreWidth;
+        private double _restoreHeight;
+        private bool _isMaximized = false;
+
         public CustomTitleBar(string title)
         {
             InitializeComponent();
-
             TitleName.Text = title;
+
             // 버튼 이벤트
             MinimizeButton.Click += (s, e) =>
             {
@@ -49,7 +56,7 @@ namespace DocuSummarizer.UserControls
                 {
                     ToggleMaximizeRestore();
                 }
-                else
+                else if (!_isMaximized)
                 {
                     win.DragMove();
                 }
@@ -59,16 +66,64 @@ namespace DocuSummarizer.UserControls
         private void ToggleMaximizeRestore()
         {
             var win = Window.GetWindow(this);
-            if (win.WindowState == WindowState.Maximized)
+
+            if (_isMaximized)
             {
-                win.WindowState = WindowState.Normal;
+                // 이전 상태로 복원
+                RestoreWindow();
                 MaximizeRestoreButton.Content = "☐";
             }
             else
             {
-                win.WindowState = WindowState.Maximized;
-                MaximizeRestoreButton.Content = "🗗"; // 복원 아이콘처럼 보이는 글자
+                // 현재 상태 저장 후 최대화
+                SaveCurrentState();
+                MaximizeToWorkArea();
+                MaximizeRestoreButton.Content = "🗗";
             }
+        }
+
+        /// <summary>
+        /// 현재 윈도우 상태를 저장
+        /// </summary>
+        private void SaveCurrentState()
+        {
+            var window = Window.GetWindow(this);
+            _restoreLeft = window.Left;
+            _restoreTop = window.Top;
+            _restoreWidth = window.Width;
+            _restoreHeight = window.Height;
+        }
+
+        /// <summary>
+        /// 윈도우를 작업 영역 내에서 최대화
+        /// </summary>
+        private void MaximizeToWorkArea()
+        {
+            var workArea = SystemParameters.WorkArea;
+            var window = Window.GetWindow(this);
+
+            // 윈도우를 작업 영역에 맞게 설정
+            window.Left = workArea.Left;
+            window.Top = workArea.Top;
+            window.Width = workArea.Width;
+            window.Height = workArea.Height;
+
+            _isMaximized = true;
+        }
+
+        /// <summary>
+        /// 윈도우를 이전 상태로 복원
+        /// </summary>
+        private void RestoreWindow()
+        {
+            var window = Window.GetWindow(this);
+
+            window.Left = _restoreLeft;
+            window.Top = _restoreTop;
+            window.Width = _restoreWidth;
+            window.Height = _restoreHeight;
+
+            _isMaximized = false;
         }
     }
 }

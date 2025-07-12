@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:DocuSummarizer"
+    xmlns:maincontrol="clr-namespace:DocuSummarizer.Views.MainControls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:usercontrol="clr-namespace:DocuSummarizer.UserControls"
     Title="DocuSummarizer"
@@ -35,5 +36,10 @@
         </Grid>
         <!--#endregion-->
 
+        <!--#region Main View-->
+        <Grid Grid.Row="2">
+            <maincontrol:PDFDragAndDropView />
+        </Grid>
+        <!--#endregion-->
     </Grid>
 </Window>
